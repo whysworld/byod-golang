@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{.Title}}</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/function.js"></script>
+</head>
+
+<body>
+    <form class="row g-3 needs-validation" id="registration-form">
+        <div class="header">
+            <div class="logo">Logo</div>
+            <div class="header-title">
+                Self Registration
+            </div>
+        </div>
+        <div class="container">
+            <div class="content-title">
+                {{.Title}}
+            </div>
+            <div class="content-wrapper">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control input-custom" placeholder="Name" aria-label="Name"
+                        aria-describedby="button-name" required>
+                    <button class="btn btn-outline-secondary btn-custom" type="button" id="button-name">
+                        <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
+                    </button>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control input-custom" placeholder="Email" aria-label="Email"
+                        aria-describedby="button-email" required>
+                    <button class="btn btn-outline-secondary btn-custom" type="button" id="button-email">
+                        <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
+                    </button>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control input-custom" placeholder="Company" aria-label="Company"
+                        aria-describedby="button-company" required>
+                    <button class="btn btn-outline-secondary btn-custom" type="button" id="button-company">
+                        <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
+                    </button>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control input-custom" placeholder="Sponsor's Email"
+                        aria-label="Sponsor-Email" aria-describedby="button-sponsor-email" required>
+                    <button class="btn btn-outline-secondary btn-custom" type="button" id="button-sponsor-email">
+                        <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
+                    </button>
+                </div>
+                <div class="input-group mb-3">
+                    <select class="form-select" aria-label="option1" required>
+                        <option selected></option>
+                        <option value="Customer">Customer</option>
+                        <option value="Partner">Partner</option>
+                        <option value="Interview Candidate">Interview Candidate</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <select class="form-select" aria-label="option2" required>
+                        <option selected></option>
+                        <option value="Business Meeting">Business Meeting</option>
+                        <option value="Personal Meeting">Personal Meeting</option>
+                        <option value="Interview">Interview</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="btn-group">
+                <button type="submit" class="btn-accept btn" id="registration-register">Register</button>
+                <div class="btn-decline btn" id="registration-login">Login</div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
