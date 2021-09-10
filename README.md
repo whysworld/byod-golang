@@ -21,6 +21,6 @@ http://localhost:8080/registration/accept/
 
 
 ## 3. Sponsor
-http://localhost:8080/sponsor/login/
+http://localhost:8080/{OID}/sponsor/login/
 
 http://localhost:8080/sponsor/users/

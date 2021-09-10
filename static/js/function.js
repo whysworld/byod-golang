@@ -32,13 +32,21 @@ $(document).ready(function () {
         e.preventDefault();
         window.location.href = "/registration/accept"
     })
-    $("#sponsor-login").on("submit", function(e){
+    $("#registration-login-btn").on("click", function(e){
         e.preventDefault();
-        window.location.href = "/sponsor/users"
+        window.location.href = "/registration/login"
     })
+    // $("#sponsor-login").on("submit", function(e){
+    //     e.preventDefault();
+    //     window.location.href = "/sponsor/users"
+    // })
     $("#sponsor-cancel").on("click", function(e){
         e.preventDefault();
         window.location.href = "/sponsor/users"
+    })
+    $("#logout").on("click", function(e){
+        e.preventDefault();
+        window.location.href = "/sponsor/logout"
     })
     $(window).resize(function () {
         setContentHeight();
