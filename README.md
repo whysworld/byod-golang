@@ -1,6 +1,6 @@
 # Run the appplication
 go install
-go run app.go
+go run main.go
 
 # EndPoints
 ## 1. HotSpot
