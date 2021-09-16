@@ -139,12 +139,6 @@ func main() {
 	myRouter.HandleFunc("/guestportal/{portal_id}/users/", GuestPortalUsersPageHandler)
 	myRouter.HandleFunc("/guestportal/{portal_id}/logout/", views.LogoutFunc)
 
-	//Sponsor Portal endpoints
-	// myRouter.HandleFunc("/{id}/sponsor/login/",(views.SponsorLoginPageHandler))
-	// myRouter.HandleFunc("/sponsor/users/", views.MakeHandler(views.RequiresLogin(views.SponsorUsersPageHandler)))
-	//logout
-	// myRouter.HandleFunc("/sponsor/logout/", views.RequiresLogin(views.LogoutFunc))
-
 	log.Fatal(http.ListenAndServe(":8080", myRouter))
 }
 
