@@ -1,5 +1,6 @@
 # Run the appplication
 go install
+
 go run main.go
 
 # EndPoints

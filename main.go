@@ -11,15 +11,15 @@ func main() {
 	// myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter := NewRouter()
 	//HotSpot Portal endpoints
-	myRouter.HandleFunc("/hotspot/home/", views.MakeHandler(views.HotSpotHomePageHandler))
-	myRouter.HandleFunc("/hotspot/accept/", views.MakeHandler(views.HotSpotAcceptPageHandler))
-	myRouter.HandleFunc("/hotspot/decline/", views.MakeHandler(views.HotSpotDeclinePageHandler))
+	myRouter.HandleFunc("/guestportal/{portal_id}/home/", views.MakeHandler(views.HotSpotHomePageHandler))
+	myRouter.HandleFunc("/guestportal/{portal_id}/accept/", views.MakeHandler(views.HotSpotAcceptPageHandler))
+	myRouter.HandleFunc("/guestportal/{portal_id}/decline/", views.MakeHandler(views.HotSpotDeclinePageHandler))
 
 	//Self Registration endpoints
-	myRouter.HandleFunc("/registration/home/", views.MakeHandler(views.RegistratoinHomePageHandler))
-	myRouter.HandleFunc("/registration/info/", views.MakeHandler(views.RegistratoinInfoPageHandler))
-	myRouter.HandleFunc("/registration/login/", views.MakeHandler(views.RegistratoinLoginPageHandler))
-	myRouter.HandleFunc("/registration/accept/", views.MakeHandler(views.RegistratoinAcceptPageHandler))
+	myRouter.HandleFunc("/guestportal/{portal_id}/home/", views.MakeHandler(views.RegistratoinHomePageHandler))
+	// myRouter.HandleFunc("/guestportal/{portal_id}/info/", views.MakeHandler(views.RegistratoinInfoPageHandler))
+	// myRouter.HandleFunc("/guestportal/{portal_id}/login/", views.MakeHandler(views.RegistratoinLoginPageHandler))
+	myRouter.HandleFunc("/guestportal/{portal_id}/accept/", views.MakeHandler(views.RegistratoinAcceptPageHandler))
 
 	//Sponsor Portal endpoints
 	myRouter.HandleFunc("/{id}/sponsor/login/",(views.SponsorLoginPageHandler))

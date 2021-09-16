@@ -1,6 +1,8 @@
 package types
 
 type HotSpotPage struct {
+	PortalID	   string
+	Query		   string
 	Title          string
 	WelcomeTitle   string
 	WelcomeMessage string
@@ -8,6 +10,8 @@ type HotSpotPage struct {
 }
 
 type GuestInfo struct {
+	PortalID	   string
+	Query		   string
 	Name         string
 	Email        string
 	Company      string
@@ -17,6 +21,8 @@ type GuestInfo struct {
 }
 
 type RegistrationPage struct {
+	PortalID	   string
+	Query		   string
 	Title          string
 	WelcomeTitle   string
 	WelcomeMessage string
@@ -25,6 +31,8 @@ type RegistrationPage struct {
 }
 
 type SponsorPage struct {
+	PortalID	   string
+	Query		   string
 	Title          string
 	WelcomeTitle   string
 	WelcomeMessage string
