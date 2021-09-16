@@ -14,37 +14,38 @@
 </head>
 
 <body>
-    <div class="header">
-        <div class="logo">Logo</div>
-        <div class="header-title">
-            Self Registration
-        </div>
-    </div>
-    <div class="container">
-        <div class="content-title">
-            {{.Title}}
-        </div>
-        <div class="content-wrapper">
-            <div class="welcome-wrapper">
-                <div class="welcome-title">
-                    {{.WelcomeTitle}}
-                </div>
-                <div class="welcome-message">
-                    {{.WelcomeMessage}}
-                </div>
-            </div>
-            <div class="content">
-                {{.Content}}
+    <form class="row g-3" method="POST">
+        <div class="header">
+            <div class="logo">Logo</div>
+            <div class="header-title">
+                Self Registration
             </div>
         </div>
-    </div>
-    <div class="footer">
-        <div class="btn-group">
-            <div class="btn-accept btn" id="registration-accept">Accept</div>
-            <div class="btn-decline btn" id="registration-decline">Decline</div>
+        <div class="container">
+            <div class="content-title">
+                {{.Title}}
+            </div>
+            <div class="content-wrapper">
+                <div class="welcome-wrapper">
+                    <div class="welcome-title">
+                        {{.WelcomeTitle}}
+                    </div>
+                    <div class="welcome-message">
+                        {{.WelcomeMessage}}
+                    </div>
+                </div>
+                <div class="content">
+                    {{.Content}}
+                </div>
+            </div>
         </div>
-    </div>
-
+        <div class="footer">
+            <div class="btn-group">
+                <button type="submit" name="action" value="accept" class="btn-accept btn">Accept</button>
+                <button type="submit" name="action" value="decline" class="btn-decline btn">Decline</button>
+            </div>
+        </div>
+    </form>
 </body>
 
 </html>

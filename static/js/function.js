@@ -8,10 +8,10 @@ function setContentHeight() {
 }
 $(document).ready(function () {
     setContentHeight();
-    $("#logout").on("click", function(e){
-        e.preventDefault();
-        window.location.href = "/sponsor/logout"
-    })
+    // $("#logout").on("click", function(e){
+    //     e.preventDefault();
+    //     window.location.href = "/sponsor/logout"
+    // })
     $(window).resize(function () {
         setContentHeight();
     })

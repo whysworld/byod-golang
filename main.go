@@ -6,26 +6,144 @@ import (
 	"github.com/gorilla/mux"
 	"whysworld.net/byod/views"
 )
+//guestportal homepage handler
+func GuestPortalHomePageHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	portal_id, ok := vars["portal_id"]
+	if !ok {
+		log.Print("portal_id is missing in parameters")
+	}
+	switch portal_id{
+		case "hotspot":
+			views.HotSpotHomePageHandler(w, r)
+			return
+		case "registration":
+			views.RegistratoinHomePageHandler(w, r)
+			return
+		case "sponsor":
+			return
+		default:
+			http.NotFound(w, r)
+			return
+	}
+	http.NotFound(w, r)
+}
+//guestportal accept page handler
+func GuestPortalAcceptPageHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	portal_id, ok := vars["portal_id"]
+	if !ok {
+		log.Print("portal_id is missing in parameters")
+	}
+	switch portal_id{
+		case "hotspot":
+			views.HotSpotAcceptPageHandler(w, r)
+			return
+		case "registration":
+			views.RegistratoinAcceptPageHandler(w, r)
+			return
+		case "sponsor":
+			return
+		default:
+			http.NotFound(w, r)
+			return
+	}
+	http.NotFound(w, r)
+}
+//guestportal decline page handler
+func GuestPortalDeclinePageHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	portal_id, ok := vars["portal_id"]
+	if !ok {
+		log.Print("portal_id is missing in parameters")
+	}
+	switch portal_id{
+		case "hotspot":
+			views.HotSpotDeclinePageHandler(w, r)
+			return
+		case "registration":
+			views.RegistratoinDeclinePageHandler(w, r)
+			return
+		case "sponsor":
+			return
+		default:
+			http.NotFound(w, r)
+			return
+	}
+	http.NotFound(w, r)
+}
+//guestportal information page handler
+func GuestPortalRegistrationPageHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	portal_id, ok := vars["portal_id"]
+	if !ok {
+		log.Print("portal_id is missing in parameters")
+	}
+	switch portal_id{
+		case "registration":
+			views.RegistratoinInfoPageHandler(w, r)
+			return
+		default:
+			http.NotFound(w, r)
+			return
+	}
+	http.NotFound(w, r)
+}
+//guestportal login page handler
+func GuestPortalLoginPageHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	portal_id, ok := vars["portal_id"]
+	if !ok {
+		log.Print("portal_id is missing in parameters")
+	}
+	switch portal_id{
+		case "registration":
+			views.RegistratoinLoginPageHandler(w, r)
+			return
+		case "sponsor":
+			views.SponsorLoginPageHandler(w, r)
+			return
+		default:
+			http.NotFound(w, r)
+			return
+	}
+	http.NotFound(w, r)
+}
+//guestportal uesrs page handler
+func GuestPortalUsersPageHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	portal_id, ok := vars["portal_id"]
+	if !ok {
+		log.Print("portal_id is missing in parameters")
+	}
+	switch portal_id{
+		case "sponsor":
+			views.SponsorUsersPageHandler(w, r)
+			return
+		default:
+			http.NotFound(w, r)
+			return
+	}
+	http.NotFound(w, r)
+}
 
 func main() {
-	// myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter := NewRouter()
-	//HotSpot Portal endpoints
-	myRouter.HandleFunc("/guestportal/{portal_id}/home/", views.MakeHandler(views.HotSpotHomePageHandler))
-	myRouter.HandleFunc("/guestportal/{portal_id}/accept/", views.MakeHandler(views.HotSpotAcceptPageHandler))
-	myRouter.HandleFunc("/guestportal/{portal_id}/decline/", views.MakeHandler(views.HotSpotDeclinePageHandler))
 
-	//Self Registration endpoints
-	myRouter.HandleFunc("/guestportal/{portal_id}/home/", views.MakeHandler(views.RegistratoinHomePageHandler))
-	// myRouter.HandleFunc("/guestportal/{portal_id}/info/", views.MakeHandler(views.RegistratoinInfoPageHandler))
-	// myRouter.HandleFunc("/guestportal/{portal_id}/login/", views.MakeHandler(views.RegistratoinLoginPageHandler))
-	myRouter.HandleFunc("/guestportal/{portal_id}/accept/", views.MakeHandler(views.RegistratoinAcceptPageHandler))
+	//Guest Portal endpoints
+	myRouter.HandleFunc("/guestportal/{portal_id}/home/", GuestPortalHomePageHandler)
+	myRouter.HandleFunc("/guestportal/{portal_id}/accept/", GuestPortalAcceptPageHandler)
+	myRouter.HandleFunc("/guestportal/{portal_id}/decline/", GuestPortalDeclinePageHandler)
+	myRouter.HandleFunc("/guestportal/{portal_id}/info/", GuestPortalRegistrationPageHandler)
+	myRouter.HandleFunc("/guestportal/{portal_id}/login/", GuestPortalLoginPageHandler)
+	myRouter.HandleFunc("/guestportal/{portal_id}/users/", GuestPortalUsersPageHandler)
+	myRouter.HandleFunc("/guestportal/{portal_id}/logout/", views.LogoutFunc)
 
 	//Sponsor Portal endpoints
-	myRouter.HandleFunc("/{id}/sponsor/login/",(views.SponsorLoginPageHandler))
-	myRouter.HandleFunc("/sponsor/users/", views.MakeHandler(views.RequiresLogin(views.SponsorUsersPageHandler)))
+	// myRouter.HandleFunc("/{id}/sponsor/login/",(views.SponsorLoginPageHandler))
+	// myRouter.HandleFunc("/sponsor/users/", views.MakeHandler(views.RequiresLogin(views.SponsorUsersPageHandler)))
 	//logout
-	myRouter.HandleFunc("/sponsor/logout/", views.RequiresLogin(views.LogoutFunc))
+	// myRouter.HandleFunc("/sponsor/logout/", views.RequiresLogin(views.LogoutFunc))
 
 	log.Fatal(http.ListenAndServe(":8080", myRouter))
 }

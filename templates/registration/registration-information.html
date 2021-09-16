@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <form class="row g-3 needs-validation" id="registration-form">
+    <form class="row g-3" method="POST">
         <div class="header">
             <div class="logo">Logo</div>
             <div class="header-title">
@@ -28,34 +28,34 @@
             <div class="content-wrapper">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control input-custom" placeholder="Name" aria-label="Name"
-                        aria-describedby="button-name" required>
+                        aria-describedby="button-name" required name="name">
                     <button class="btn btn-outline-secondary btn-custom" type="button" id="button-name">
                         <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
                     </button>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control input-custom" placeholder="Email" aria-label="Email"
+                    <input name="email" type="email" class="form-control input-custom" placeholder="Email" aria-label="Email"
                         aria-describedby="button-email" required>
                     <button class="btn btn-outline-secondary btn-custom" type="button" id="button-email">
                         <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
                     </button>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control input-custom" placeholder="Company" aria-label="Company"
+                    <input name="company" type="text" class="form-control input-custom" placeholder="Company" aria-label="Company"
                         aria-describedby="button-company" required>
                     <button class="btn btn-outline-secondary btn-custom" type="button" id="button-company">
                         <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
                     </button>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control input-custom" placeholder="Sponsor's Email"
+                    <input name="sponsor_email" type="email" class="form-control input-custom" placeholder="Sponsor's Email"
                         aria-label="Sponsor-Email" aria-describedby="button-sponsor-email" required>
                     <button class="btn btn-outline-secondary btn-custom" type="button" id="button-sponsor-email">
                         <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
                     </button>
                 </div>
                 <div class="input-group mb-3">
-                    <select class="form-select" aria-label="option1" required>
+                    <select name="option1" class="form-select" aria-label="option1" required>
                         <option selected></option>
                         <option value="Customer">Customer</option>
                         <option value="Partner">Partner</option>
@@ -64,7 +64,7 @@
                     </select>
                 </div>
                 <div class="input-group mb-3">
-                    <select class="form-select" aria-label="option2" required>
+                    <select name="option2" class="form-select" aria-label="option2" required>
                         <option selected></option>
                         <option value="Business Meeting">Business Meeting</option>
                         <option value="Personal Meeting">Personal Meeting</option>
@@ -76,8 +76,8 @@
         </div>
         <div class="footer">
             <div class="btn-group">
-                <button type="submit" class="btn-accept btn" id="registration-register">Register</button>
-                <div class="btn-decline btn" id="registration-login-btn">Login</div>
+                <button type="submit" class="btn-accept btn" name="action" value="register">Register</button>
+                <button class="btn-decline btn" id="registration-login-btn" name="action" value="login">Login</button>
             </div>
         </div>
     </form>

@@ -14,10 +14,10 @@
 </head>
 
 <body>
-    <form class="row g-3 needs-validation" id="sponsor-login">
+    <form class="row g-3 needs-validation" method="POST">
         <div class="header">
             <div class="logo">Logo</div>
-            <div class="logout" id="logout">Log out</div>
+            <button type="submit" value="logout" name="action" class="logout" id="logout">Log out</button>
             <div class="header-title">
                 Sponsor Portal
             </div>
@@ -59,7 +59,7 @@
                         <label for="action" class="col-form-label">Action: </label>
                     </div>
                     <div class="col-content">
-                        <select class="form-select" aria-label="action" required>
+                        <select class="form-select" aria-label="action">
                             <option selected></option>
                             <option value="Business Meeting">Admit</option>
                             <option value="Personal Meeting">Revoke</option>

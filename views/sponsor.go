@@ -5,11 +5,10 @@ import (
 	"log"
 	"html/template"
 	"net/http"
-
 	"whysworld.net/byod/types"
 	"whysworld.net/byod/sessions"
 	"whysworld.net/byod/db"
-	"github.com/satori/go.uuid"
+	// "github.com/satori/go.uuid"
 	"github.com/gorilla/mux"
 )
 
@@ -34,22 +33,22 @@ func loadSponsorUsersPage() (*types.SponsorPage, error) {
 
 func SponsorLoginPageHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-    key := vars["id"]
-	log.Print("PATH: ", r.URL.Path)
-	log.Print("Key: ", key)
+    portal_id := vars["portal_id"]
+	log.Print("login: ", portal_id)
 	if sessions.IsLoggedIn(r) {
-		http.Redirect(w, r, "/sponsor/users", 302)
+		redirectURI := fmt.Sprintf("%s-users", portal_id)
+		http.Redirect(w, r, redirectURI, http.StatusFound)
 		return
 	}
 	session, _ := sessions.Store.Get(r, "byod_session")
 	p, err := loadSponsorLoginPage()
 	if err != nil {
-		http.Redirect(w, r, "sponsor/users", 302)
 		return
 	}
 	switch r.Method {
 	case "GET":
-		renderSponsorTemplate(w, "sponsor-login", p)
+		templateName := fmt.Sprintf("%s-login", portal_id)
+		renderSponsorTemplate(w, templateName, p)
 	case "POST":
 		log.Print("Inside POST")
 		r.ParseForm()
@@ -60,32 +59,50 @@ func SponsorLoginPageHandler(w http.ResponseWriter, r *http.Request) {
 		if (username != "" && password != "") && db.ValidUser(username, password) {
 			session.Values["loggedin"] = "true"
 			session.Values["username"] = username
-			session.Values["oid"] = key
+			session.Values["oid"] = portal_id
 			session.Save(r, w)
 			log.Print("user ", username, " is authenticated")
-			http.Redirect(w, r, "/sponsor/users", 302)
+			templateName := fmt.Sprintf("/guestportal/%s/users?accept=true", portal_id)
+			http.Redirect(w, r, templateName, 302)
 			return
 		}
 		errorMessage := "Invalid username or password."
 		log.Print(errorMessage)
-		renderSponsorTemplate(w, "sponsor-login", &types.SponsorPage{Title: "LOGIN", WelcomeMessage: "Login here to manage your sponsored guest users", Information: DefaultInfo, ErrorMessage: errorMessage})
+		templateName := fmt.Sprintf("%s-login", portal_id)
+		renderSponsorTemplate(w, templateName, &types.SponsorPage{Title: "LOGIN", WelcomeMessage: "Login here to manage your sponsored guest users", Information: DefaultInfo, ErrorMessage: errorMessage})
 	default:
-		oid := uuid.NewV4().String()
-		redirectURI := fmt.Sprintf("/%s/sponsor/login", oid)
-		http.Redirect(w, r, redirectURI, http.StatusUnauthorized)
-		// http.Redirect(w, r, "/sponsor/login/", http.StatusUnauthorized)
+		// oid := uuid.NewV4().String()
+		// redirectURI := fmt.Sprintf("/%s/sponsor/login", oid)
+		// http.Redirect(w, r, redirectURI, http.StatusUnauthorized)
+		
+		renderSponsorTemplate(w, "registration-decline", p)
+		return
 	}
 }
 
 func SponsorUsersPageHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+    portal_id := vars["portal_id"]
 	p, err := loadSponsorUsersPage()
 	print(p)
 	if err != nil {
-
-		http.Redirect(w, r, "/sponsor/users", http.StatusFound)
 		return	
 	}
-	renderSponsorTemplate(w, "sponsor-users", p)
+	switch r.Method {
+	case "GET":
+		templateName := fmt.Sprintf("%s-users", portal_id)
+		renderSponsorTemplate(w, templateName, p)
+	case "POST":
+		r.ParseForm()
+		action := r.Form.Get("action")
+		if action == "logout" {
+			redirectURI := fmt.Sprintf("/guestportal/%s/logout?loggedout=true", portal_id)
+			http.Redirect(w, r, redirectURI, http.StatusFound)
+			return
+		}
+	default: 
+		renderSponsorTemplate(w, "sponsor-users", p)
+	}
 }
 
 var sponsorTemplate = template.Must(template.ParseFiles("templates/sponsor/sponsor-login.html", "templates/sponsor/sponsor-users.html"))
