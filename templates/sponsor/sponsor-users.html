@@ -35,12 +35,17 @@
 
                 <div class="info input-group mb-3">
                     <div class="info-left">
-                        <div class="text">{{.Information.Name}}</div>
-                        <a class="text">{{.Information.Email}}</a>
-                        <div class="text">{{.Information.Company}}</div>
-                        <div class="text">{{.Information.Option1}}</div>
-                        <div class="text">{{.Information.Option2}}</div>
+                        {{range $key, $info := .Information}}
+                        <div class="user-info">
+                            <div class="text">{{$info.Name}}</div>
+                            <a class="text">{{$info.Email}}</a>
+                            <div class="text">{{$info.Company}}</div>
+                            <div class="text">{{$info.Option1}}</div>
+                            <div class="text">{{$info.Option2}}</div>
+                        </div>
+                        {{end}}
                     </div>
+
                     <div class="info-right">
                         <div class="status">{{.Status}}</div>
                         <div class="time-left">{{.TimeLeft}}</div>

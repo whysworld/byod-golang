@@ -25,7 +25,10 @@ func loadSponsorUsersPage() (*types.SponsorPage, error) {
 	welcomeTitle := ""
 	welcomeMessage := ""
 	content := ""
-	info := types.GuestInfo{Name: "John Doe", Email: "John.doe@gmail.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self"}
+	info := []types.GuestInfo{
+		{Name: "John Doe", Email: "John.doe@gmail.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self"},
+		{Name: "John Doe", Email: "John.doe@gmail.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self"},
+	}
 	return &types.SponsorPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: info, Status: "Admitted", TimeLeft: "2 hr 3m remaining"}, nil
 }
 

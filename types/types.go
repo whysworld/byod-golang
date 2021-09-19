@@ -27,7 +27,7 @@ type RegistrationPage struct {
 	WelcomeTitle   string
 	WelcomeMessage string
 	Content        string
-	Information    GuestInfo
+	Information    []GuestInfo
 }
 
 type SponsorPage struct {
@@ -37,7 +37,7 @@ type SponsorPage struct {
 	WelcomeTitle   string
 	WelcomeMessage string
 	Content        string
-	Information    GuestInfo
+	Information    []GuestInfo
 	Status         string
 	TimeLeft       string
 	ErrorMessage   string

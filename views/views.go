@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"whysworld.net/byod/types"
 )
-var DefaultInfo = types.GuestInfo{Name: "", Email: "", Company: "", SponsorEmail: "", Option1: "Other", Option2: "Other"}
+var DefaultInfo = []types.GuestInfo{{Name: "", Email: "", Company: "", SponsorEmail: "", Option1: "Other", Option2: "Other"}}
 
 var validPath = regexp.MustCompile("^/guestportal/([a-zA-Z0-9-_]+)/(home|accept|decline|info|login|users|logout)/$")
 
