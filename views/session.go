@@ -5,15 +5,19 @@ import (
 	"net/http"
 	"github.com/gorilla/mux"
 	"whysworld.net/byod/sessions"
-	"github.com/satori/go.uuid"
+	"log"
 )
 
 //RequiresLogin is a middleware which will be used for each httpHandler to check if there is any active session
 func RequiresLogin(handler func(w http.ResponseWriter, r *http.Request)) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if !sessions.IsLoggedIn(r) {
-			oid := uuid.NewV4().String()
-			redirectURI := fmt.Sprintf("/%s/sponsor/login", oid)
+			vars := mux.Vars(r)
+			portal_id, ok := vars["portal_id"]
+			if !ok {
+				log.Print("portal_id is missing in parameters")
+			}
+			redirectURI := fmt.Sprintf("/guestportal/%s/login", portal_id)
 			http.Redirect(w, r, redirectURI, 302)
 			return
 		}

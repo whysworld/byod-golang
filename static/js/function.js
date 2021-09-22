@@ -12,6 +12,12 @@ $(document).ready(function () {
     //     e.preventDefault();
     //     window.location.href = "/sponsor/logout"
     // })
+    $(".carousel-control-prev").on("click", function(e) { 
+        $("#usersCarousel").carousel('prev') 
+    })
+    $(".carousel-control-next").on("click", function(e) { 
+        $("#usersCarousel").carousel('next') 
+    })
     $(window).resize(function () {
         setContentHeight();
     })

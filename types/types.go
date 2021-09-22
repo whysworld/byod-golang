@@ -1,5 +1,10 @@
 package types
 
+type NullString struct {
+    String string
+    Valid  bool // Valid is true if String is not NULL
+}
+
 type HotSpotPage struct {
 	PortalID	   string
 	Query		   string
@@ -41,4 +46,15 @@ type SponsorPage struct {
 	Status         string
 	TimeLeft       string
 	ErrorMessage   string
+}
+
+type User struct {
+	Name 	       string
+	Email	       string
+	Password       string
+	Company		   string
+	Option1		   string
+	Option2        string
+	Role           string
+	CreatedBy      string
 }

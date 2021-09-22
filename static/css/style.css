@@ -96,10 +96,10 @@ body{
     height: auto;
 }
 .col-label{
-    width: 60px;
+    width: 100px;
 }
 .col-content {
-    width: calc(100% - 60px);
+    width: calc(100% - 100px);
 }
 .info{
     display: flex;
@@ -114,4 +114,26 @@ body{
 .time-left{
     font-size: 15px;
     color: green;
+}
+.btn-default{
+    padding: 3px 10px;
+}
+.slider-actions{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+.carousel-control-next, 
+.carousel-control-prev{
+    color: black;
+    opacity: 1;
+    position: relative;
+    display: block;
+    width: 60px;
+}
+
+.carousel-control-next:hover, 
+.carousel-control-prev:hover{
+    color: black;
+    opacity: 1;
 }

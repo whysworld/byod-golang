@@ -17,7 +17,8 @@
     <form class="row g-3 needs-validation" method="POST">
         <div class="header">
             <div class="logo">Logo</div>
-            <button type="submit" value="logout" name="action" class="logout" id="logout">Log out</button>
+            <button type="submit" value="logout" name="action" class="logout btn btn-default" id="logout">Log
+                out</button>
             <div class="header-title">
                 Sponsor Portal
             </div>
@@ -32,20 +33,34 @@
                         {{.WelcomeMessage}}
                     </div>
                 </div>
-
                 <div class="info input-group mb-3">
                     <div class="info-left">
-                        {{range $key, $info := .Information}}
-                        <div class="user-info">
-                            <div class="text">{{$info.Name}}</div>
-                            <a class="text">{{$info.Email}}</a>
-                            <div class="text">{{$info.Company}}</div>
-                            <div class="text">{{$info.Option1}}</div>
-                            <div class="text">{{$info.Option2}}</div>
+                        <div id="usersCarousel" class="carousel carousel-fade" data-ride="carousel">
+                            <div class="carousel-inner">
+                                {{range $key, $info := .Information}}
+                                    {{if $key}}
+                                    <div class="carousel-item active">
+                                    {{else}}
+                                    <div class="carousel-item">
+                                    {{end}}
+                                        <div class="text">{{$info.Name}}</div>
+                                        <a class="text">{{$info.Email}}</a>
+                                        <div class="text">{{$info.Company}}</div>
+                                        <div class="text">{{$info.Option1}}</div>
+                                        <div class="text">{{$info.Option2}}</div>
+                                    </div>
+                                {{end}}
+                            </div>
+                            <div class="slider-actions">
+                            <a class="carousel-control-prev" href="#usersCarousel" role="button">
+                                Previous
+                              </a>
+                              <a class="carousel-control-next" href="#usersCarousel" role="button">
+                                Next
+                              </a>
+                            </div>
                         </div>
-                        {{end}}
                     </div>
-
                     <div class="info-right">
                         <div class="status">{{.Status}}</div>
                         <div class="time-left">{{.TimeLeft}}</div>
@@ -71,12 +86,15 @@
                         </select>
                     </div>
                 </div>
+                <div class="input-group mb-3">
+                    <button class="btn btn-default" type="submit" name="action" value="add-user">Add a user</button>
+                </div>
             </div>
         </div>
         <div class="footer">
             <div class="btn-group">
-                <div class="btn-accept btn">Save</div>
-                <div class="btn-decline btn" id="sponsor-cancel">Cancel</div>
+                <button class="btn-accept btn">Save</button>
+                <button class="btn-decline btn" id="sponsor-cancel">Cancel</button>
             </div>
         </div>
     </form>

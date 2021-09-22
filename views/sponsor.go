@@ -27,12 +27,22 @@ func loadSponsorUsersPage() (*types.SponsorPage, error) {
 	content := ""
 	info := []types.GuestInfo{
 		{Name: "John Doe", Email: "John.doe@gmail.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self"},
-		{Name: "John Doe", Email: "John.doe@gmail.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self"},
+		{Name: "John Doe1", Email: "John.doe@gmail1.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self"},
 	}
 	return &types.SponsorPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: info, Status: "Admitted", TimeLeft: "2 hr 3m remaining"}, nil
 }
 
-
+func loadSponsorAddUserPage() (*types.SponsorPage, error) {
+	title := "Add a user"
+	welcomeTitle := ""
+	welcomeMessage := ""
+	content := ""
+	info := []types.GuestInfo{
+		{Name: "John Doe", Email: "John.doe@gmail.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self"},
+		{Name: "John Doe1", Email: "John.doe@gmail1.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self"},
+	}
+	return &types.SponsorPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: info, Status: "Admitted", TimeLeft: "2 hr 3m remaining"}, nil
+}
 
 func SponsorLoginPageHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
@@ -92,23 +102,63 @@ func SponsorUsersPageHandler(w http.ResponseWriter, r *http.Request) {
 		return	
 	}
 	switch r.Method {
+		case "GET":
+			templateName := fmt.Sprintf("%s-users", portal_id)
+			renderSponsorTemplate(w, templateName, p)
+		case "POST":
+			r.ParseForm()
+			action := r.Form.Get("action")
+			if action == "logout" {
+				redirectURI := fmt.Sprintf("/guestportal/%s/logout?loggedout=true", portal_id)
+				http.Redirect(w, r, redirectURI, http.StatusFound)
+				return
+			} else if action == "add-user"{
+				redirectURI := fmt.Sprintf("/guestportal/%s/adduser?action=add-user", portal_id)
+				http.Redirect(w, r, redirectURI, http.StatusFound)
+			}
+		default: 
+			renderSponsorTemplate(w, "sponsor-users", p)
+	}
+}
+
+func SponsorAddUserPageHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+    portal_id := vars["portal_id"]
+	p, err := loadSponsorAddUserPage()
+	print(p)
+	if err != nil {
+		return	
+	}
+	switch r.Method {
 	case "GET":
-		templateName := fmt.Sprintf("%s-users", portal_id)
+		templateName := fmt.Sprintf("%s-adduser", portal_id)
 		renderSponsorTemplate(w, templateName, p)
 	case "POST":
 		r.ParseForm()
 		action := r.Form.Get("action")
-		if action == "logout" {
-			redirectURI := fmt.Sprintf("/guestportal/%s/logout?loggedout=true", portal_id)
-			http.Redirect(w, r, redirectURI, http.StatusFound)
+		if action == "save" {
+			name := r.Form.Get("name")
+			email := r.Form.Get("email")
+			company := r.Form.Get("company")
+			option1 := r.Form.Get("option1")
+			option2 := r.Form.Get("option2")
+
+			log.Print("username: ", name)
+			log.Print("email: ", email)
+			log.Print("company: ", company)
+			log.Print("option2: ", option2)
+			log.Print("option1: ", option1)
+
+			templateName := fmt.Sprintf("%s-adduser", portal_id)
+			renderSponsorTemplate(w, templateName, p)
 			return
 		}
 	default: 
-		renderSponsorTemplate(w, "sponsor-users", p)
+		renderSponsorTemplate(w, "sponsor-adduser", p)
 	}
 }
 
-var sponsorTemplate = template.Must(template.ParseFiles("templates/sponsor/sponsor-login.html", "templates/sponsor/sponsor-users.html"))
+var sponsorTemplate = template.Must(template.ParseFiles("templates/sponsor/sponsor-adduser.html", "templates/sponsor/sponsor-login.html", "templates/sponsor/sponsor-users.html"))
 
 func renderSponsorTemplate(w http.ResponseWriter, tmpl string, p *types.SponsorPage) {
 	err := sponsorTemplate.ExecuteTemplate(w, tmpl+".html", p)

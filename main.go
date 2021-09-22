@@ -126,7 +126,23 @@ func GuestPortalUsersPageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	http.NotFound(w, r)
 }
-
+//guestportal add user page handler
+func GuestPortalAddUserPageHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	portal_id, ok := vars["portal_id"]
+	if !ok {
+		log.Print("portal_id is missing in parameters")
+	}
+	switch portal_id{
+		case "sponsor":
+			views.SponsorAddUserPageHandler(w, r)
+			return
+		default:
+			http.NotFound(w, r)
+			return
+	}
+	http.NotFound(w, r)
+}
 func main() {
 	myRouter := NewRouter()
 
@@ -136,7 +152,8 @@ func main() {
 	myRouter.HandleFunc("/guestportal/{portal_id}/decline/", GuestPortalDeclinePageHandler)
 	myRouter.HandleFunc("/guestportal/{portal_id}/info/", GuestPortalRegistrationPageHandler)
 	myRouter.HandleFunc("/guestportal/{portal_id}/login/", GuestPortalLoginPageHandler)
-	myRouter.HandleFunc("/guestportal/{portal_id}/users/", GuestPortalUsersPageHandler)
+	myRouter.HandleFunc("/guestportal/{portal_id}/users/", views.RequiresLogin(GuestPortalUsersPageHandler))
+	myRouter.HandleFunc("/guestportal/{portal_id}/adduser/", views.RequiresLogin(GuestPortalAddUserPageHandler))
 	myRouter.HandleFunc("/guestportal/{portal_id}/logout/", views.LogoutFunc)
 
 	log.Fatal(http.ListenAndServe(":8080", myRouter))
