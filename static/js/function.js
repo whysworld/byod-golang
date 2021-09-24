@@ -8,10 +8,15 @@ function setContentHeight() {
 }
 $(document).ready(function () {
     setContentHeight();
-    // $("#logout").on("click", function(e){
-    //     e.preventDefault();
-    //     window.location.href = "/sponsor/logout"
-    // })
+    $("#registration-login-btn").on("click", function(e){
+        e.preventDefault();
+        //http://abc/ ----> http://abc
+        var pathName = window.location.pathname.replace(/\/\/*/g,"/").replace(/\/+$/,"")
+        //http://guestportal/registration/info/ -----> info
+        var search = pathName.split("/").slice(-1).toString()
+        var url = window.location.pathname.replace(search, "login")
+        window.location.href = url
+    })
     $(".carousel-control-prev").on("click", function(e) { 
         $("#usersCarousel").carousel('prev') 
     })
