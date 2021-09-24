@@ -10,7 +10,7 @@ $(document).ready(function () {
     setContentHeight();
     $("#registration-login-btn").on("click", function(e){
         e.preventDefault();
-        //http://abc/ ----> http://abc
+        //http://guestportal/registration/info/ -----> http://guestportal/registration/info
         var pathName = window.location.pathname.replace(/\/\/*/g,"/").replace(/\/+$/,"")
         //http://guestportal/registration/info/ -----> info
         var search = pathName.split("/").slice(-1).toString()
