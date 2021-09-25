@@ -145,7 +145,7 @@ func RegistratoinLoginPageHandler(w http.ResponseWriter, r *http.Request) {
 				http.Redirect(w, r, redirectURI, http.StatusFound)
 				return
 			} else {
-				redirectURI := fmt.Sprintf("/guestportal/%s/info?accept=false", portal_id)
+				redirectURI := fmt.Sprintf("/guestportal/%s/info?action=signup", portal_id)
 				http.Redirect(w, r, redirectURI, http.StatusFound)
 				return
 			}
