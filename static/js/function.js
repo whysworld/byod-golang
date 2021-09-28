@@ -14,9 +14,19 @@ $(document).ready(function () {
         var pathName = window.location.pathname.replace(/\/\/*/g,"/").replace(/\/+$/,"")
         //http://guestportal/registration/info/ -----> info
         var search = pathName.split("/").slice(-1).toString()
-        var url = window.location.pathname.replace(search, "login")
+        var url = window.location.href.replace(search, "login")
         window.location.href = url
     })
+    $("#registration-signup-btn").on("click", function(e){
+        e.preventDefault();
+        //http://guestportal/registration/login/ -----> http://guestportal/registration/login
+        var pathName = window.location.pathname.replace(/\/\/*/g,"/").replace(/\/+$/,"")
+        //http://guestportal/registration/info/ -----> info
+        var search = pathName.split("/").slice(-1).toString()
+        var url = window.location.href.replace(search, "info")
+        window.location.href = url 
+    })
+
     $(".carousel-control-prev").on("click", function(e) { 
         $("#usersCarousel").carousel('prev') 
     })
