@@ -10,44 +10,49 @@ import (
 )
 
 func loadRegistrationHomePage() (*types.RegistrationPage, error) {
-	title := "Acceptable Use Policy"
+	title := "Self Registration"
+	subTitle := "Acceptable Use Policy"
 	welcomeTitle := "BYOD Welcome"
 	welcomeMessage := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed enim sollicitudin, venenatis massa sit amet, placerat neque. Proin blandit arcu."
 	content := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed enim sollicitudin, venenatis massa sit amet, placerat neque. Proin blandit arcu at metus bibendum, a fringilla purus feugiat. Mauris nec nulla auctor, porta enim et, eleifend magna. Phasellus blandit quam ut ante posuere tempus. Sed condimentum elementum libero, sit amet semper sapien tempus eget. Duis egestas vehicula semper. Nulla eleifend, felis tincidunt porttitor porta, quam lacus rhoncus ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed enim sollicitudin, venenatis massa sit amet, placerat neque. Proin blandit arcu at metus bibendum, a fringilla purus feugiat. Mauris nec nulla auctor, porta enim et, eleifend magna. Phasellus blandit quam ut ante posuere tempus. Sed condimentum elementum libero, sit amet semper sapien tempus eget. Duis egestas vehicula semper. Nulla eleifend, felis tincidunt porttitor porta, quam lacus rhoncus ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed enim sollicitudin, venenatis massa sit amet, placerat neque. Proin blandit arcu at metus bibendum, a fringilla purus feugiat. Mauris nec nulla auctor, porta enim et, eleifend magna. Phasellus blandit quam ut ante posuere tempus. Sed condimentum elementum libero, sit amet semper sapien tempus eget. Duis egestas vehicula semper. Nulla eleifend, felis tincidunt porttitor porta, quam lacus rhoncus ipsum"
 
-	return &types.RegistrationPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo}, nil
+	return &types.RegistrationPage{Title: title, SubTitle:subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo}, nil
 }
 
 func loadRegistrationInfoPage() (*types.RegistrationPage, error) {
-	title := "Guest Information"
+	title := "Self Registration"
+	subTitle := "Guest Information"
 	welcomeTitle := ""
 	welcomeMessage := ""
 	content := ""
-	return &types.RegistrationPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo}, nil
+	return &types.RegistrationPage{Title: title, SubTitle:subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo}, nil
 }
 
 func loadRegistrationAcceptPage() (*types.RegistrationPage, error) {
-	title := "Success"
+	title := "Self Registration"
+	subTitle := "Success"
 	welcomeTitle := ""
 	welcomeMessage := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed enim sollicitudin, venenatis massa sit amet, placerat neque. Proin blandit arcu."
 	content := ""
-	return &types.RegistrationPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo}, nil
+	return &types.RegistrationPage{Title: title, SubTitle:subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo}, nil
 }
 
 func loadRegistrationLoginPage() (*types.RegistrationPage, error) {
-	title := "Success"
+	title := "Self Registration"
+	subTitle := "Success"
 	welcomeTitle := "Install"
 	welcomeMessage := "Your password is in your email. If Company policy requires your sponsor to approve your access, email will be sent to you .. After that approval"
 	content := ""
-	return &types.RegistrationPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo}, nil
+	return &types.RegistrationPage{Title: title, SubTitle:subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo}, nil
 }
 
 func loadRegistrationDeclinePage() (*types.RegistrationPage, error) {
-	title := "Decline"
+	title := "Self Registration"
+	subTitle := "Decline"
 	welcomeTitle := "Install"
 	welcomeMessage := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed enim sollicitudin, venenatis massa sit amet, placerat neque. Proin blandit arcu."
 	content := ""
-	return &types.RegistrationPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo}, nil
+	return &types.RegistrationPage{Title: title, SubTitle:subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo}, nil
 }
 func RegistratoinHomePageHandler(w http.ResponseWriter, r *http.Request) {
 	//get params (portal_id)

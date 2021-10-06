@@ -18,66 +18,77 @@
         <div class="header">
             <div class="logo">Logo</div>
             <div class="header-title">
-                Self Registration
+                {{.Title}}
             </div>
         </div>
         <div class="container">
             <div class="content-title">
-                {{.Title}}
+                {{.SubTitle}}
             </div>
             <div class="content-wrapper">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control input-custom" placeholder="Name" aria-label="Name"
-                        aria-describedby="button-name" required name="name">
-                    <button class="btn btn-outline-secondary btn-custom" type="button" id="button-name">
-                        <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
-                    </button>
+                <div class="form-floating mb-3">
+                    <input 
+                        type="text" 
+                        class="form-control input-custom" 
+                        id="name"
+                        required 
+                        name="name"
+                    >
+                    <label for="name">Name</label>
                 </div>
-                <div class="input-group mb-3">
-                    <input name="email" type="email" class="form-control input-custom" placeholder="Email" aria-label="Email"
-                        aria-describedby="button-email" required>
-                    <button class="btn btn-outline-secondary btn-custom" type="button" id="button-email">
-                        <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
-                    </button>
+                <div class="form-floating form-floating mb-3">
+                    <input 
+                        id="email"
+                        name="email" 
+                        type="email" 
+                        class="form-control input-custom" 
+                        required
+                    >
+                    <label for="email">Email</label>
                 </div>
-                <div class="input-group mb-3">
-                    <input name="company" type="text" class="form-control input-custom" placeholder="Company" aria-label="Company"
-                        aria-describedby="button-company" required>
-                    <button class="btn btn-outline-secondary btn-custom" type="button" id="button-company">
-                        <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
-                    </button>
+                <div class="form-floating form-floating mb-3">
+                    <input 
+                        id="company"
+                        name="company" 
+                        type="text" 
+                        class="form-control input-custom" 
+                        required
+                    >
+                    <label for="company">company</label>
                 </div>
-                <div class="input-group mb-3">
-                    <input name="sponsor_email" type="email" class="form-control input-custom" placeholder="Sponsor's Email"
-                        aria-label="Sponsor-Email" aria-describedby="button-sponsor-email" required>
-                    <button class="btn btn-outline-secondary btn-custom" type="button" id="button-sponsor-email">
-                        <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
-                    </button>
+                <div class="form-floating form-floating mb-3">
+                    <input 
+                        name="sponsor_email" 
+                        type="email" 
+                        class="form-control input-custom" 
+                        required
+                    >
+                    <label for="sponsor_email">Sponsor's Email</label>
                 </div>
-                <div class="input-group mb-3">
-                    <select name="option1" class="form-select" aria-label="option1" required>
-                        <option selected></option>
+                <div class="form-floating mb-3">
+                    <select id="option1" name="option1" class="form-select" aria-label="option1" required>
                         <option value="Customer">Customer</option>
                         <option value="Partner">Partner</option>
                         <option value="Interview Candidate">Interview Candidate</option>
                         <option value="Other">Other</option>
                     </select>
+                    <label for="option1">Company</label>
                 </div>
-                <div class="input-group mb-3">
+                <div class="form-floating mb-3">
                     <select name="option2" class="form-select" aria-label="option2" required>
-                        <option selected></option>
                         <option value="Business Meeting">Business Meeting</option>
                         <option value="Personal Meeting">Personal Meeting</option>
                         <option value="Interview">Interview</option>
                         <option value="Other">Other</option>
                     </select>
+                    <label for="option2">I am here for</label>
                 </div>
             </div>
         </div>
         <div class="footer">
             <div class="btn-group">
-                <button type="submit" class="btn-accept btn" name="action" value="register">Register</button>
-                <button class="btn-decline btn" id="registration-login-btn" name="action" value="login">Login</button>
+                <button type="submit" class="btn-decline btn" name="action" value="register">Register</button>
+                <button class="btn-accept btn" id="registration-login-btn" name="action" value="login">Login</button>
             </div>
         </div>
     </form>

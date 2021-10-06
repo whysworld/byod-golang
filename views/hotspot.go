@@ -10,28 +10,31 @@ import (
 )
 
 func LoadHotSpotHomePage() (*types.HotSpotPage, error) {
-	title := "Acceptable Use Policy"
+	subTitle := "Acceptable Use Policy"
+	title := "HotSpot Portal"
 	welcomeTitle := "BYOD Welcome"
 	welcomeMessage := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed enim sollicitudin, venenatis massa sit amet, placerat neque. Proin blandit arcu."
 	content := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed enim sollicitudin, venenatis massa sit amet, placerat neque. Proin blandit arcu at metus bibendum, a fringilla purus feugiat. Mauris nec nulla auctor, porta enim et, eleifend magna. Phasellus blandit quam ut ante posuere tempus. Sed condimentum elementum libero, sit amet semper sapien tempus eget. Duis egestas vehicula semper. Nulla eleifend, felis tincidunt porttitor porta, quam lacus rhoncus ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed enim sollicitudin, venenatis massa sit amet, placerat neque. Proin blandit arcu at metus bibendum, a fringilla purus feugiat. Mauris nec nulla auctor, porta enim et, eleifend magna. Phasellus blandit quam ut ante posuere tempus. Sed condimentum elementum libero, sit amet semper sapien tempus eget. Duis egestas vehicula semper. Nulla eleifend, felis tincidunt porttitor porta, quam lacus rhoncus ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed enim sollicitudin, venenatis massa sit amet, placerat neque. Proin blandit arcu at metus bibendum, a fringilla purus feugiat. Mauris nec nulla auctor, porta enim et, eleifend magna. Phasellus blandit quam ut ante posuere tempus. Sed condimentum elementum libero, sit amet semper sapien tempus eget. Duis egestas vehicula semper. Nulla eleifend, felis tincidunt porttitor porta, quam lacus rhoncus ipsum"
 
-	return &types.HotSpotPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content}, nil
+	return &types.HotSpotPage{Title: title, SubTitle:subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content}, nil
 }
 
 func LoadHotSpotAcceptPage() (*types.HotSpotPage, error) {
-	title := "Success"
+	title := "HotSpot Portal"
+	subTitle := "Success"
 	welcomeTitle := "Install"
 	welcomeMessage := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed enim sollicitudin, venenatis massa sit amet, placerat neque. Proin blandit arcu."
 	content := ""
-	return &types.HotSpotPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content}, nil
+	return &types.HotSpotPage{Title: title, SubTitle:subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content}, nil
 }
 
 func LoadHotSpotDeclinePage() (*types.HotSpotPage, error) {
-	title := "DECLINED"
+	title := "HotSpot Portal"
+	subTitle := "DECLINED"
 	welcomeTitle := "Install"
 	welcomeMessage := "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed enim sollicitudin, venenatis massa sit amet, placerat neque. Proin blandit arcu."
 	content := ""
-	return &types.HotSpotPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content}, nil
+	return &types.HotSpotPage{Title: title, SubTitle:subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content}, nil
 }
 
 func HotSpotHomePageHandler(w http.ResponseWriter, r *http.Request) {

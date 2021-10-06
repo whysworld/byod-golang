@@ -18,12 +18,12 @@
         <div class="header">
             <div class="logo">Logo</div>
             <div class="header-title">
-                Self Registration
+                {{.Title}}
             </div>
         </div>
         <div class="container">
             <div class="content-title">
-                {{.Title}}
+                {{.SubTitle}}
             </div>
             <div class="content-wrapper">
                 <div class="welcome-wrapper">
@@ -31,26 +31,33 @@
                         {{.WelcomeMessage}}
                     </div>
                 </div>
-                <div class="input-group mb-3">
-                    <input type="email" class="form-control input-custom" placeholder="Email" aria-label="Email"
-                        aria-describedby="button-email" required>
-                    <button class="btn btn-outline-secondary btn-custom" type="button" id="button-email">
-                        <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
-                    </button>
+                <div class="form-floating mb-3">
+                    <input 
+                        type="email"
+                        name="email"
+                        id="email"
+                        class="form-control input-custom" 
+                        required
+                    >
+                    <label for="email">Email</label>
                 </div>
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control input-custom" placeholder="Password"
-                        aria-label="Password" aria-describedby="button-password" required>
-                    <button class="btn btn-outline-secondary btn-custom" type="button" id="button-password">
-                        <img src="/static/img/delete.svg" alt="delete" class="icon-remove">
-                    </button>
+                <div class="form-floating mb-3">
+                    <input
+                        name="password"
+                        type="password"
+                        id="password"
+                        class="form-control input-custom" 
+                        placeholder="Password"
+                        required
+                    >
+                    <label for="password">Password</label>
                 </div>
             </div>
         </div>
         <div class="footer">
             <div class="btn-group">
-                <button name="action" value="success" type="submit" class="btn-accept btn">Log In</button>
                 <button name="action" id="registration-signup-btn" value="signup" type="submit" class="btn-decline btn">Sign Up</button>
+                <button name="action" value="success" type="submit" class="btn-accept btn">Submit</button>
             </div>
         </div>
     </form>

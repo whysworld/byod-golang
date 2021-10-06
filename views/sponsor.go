@@ -13,27 +13,32 @@ import (
 )
 
 func loadSponsorLoginPage() (*types.SponsorPage, error) {
-	title := "LOGIN"
+	title := "Sponsor Portal"
+	subTitle := "LOGIN"
 	welcomeTitle := ""
 	welcomeMessage := "Login here to manage your sponsored guest users"
 	content := ""
-	return &types.SponsorPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo, Status: "", TimeLeft: ""}, nil
+	return &types.SponsorPage{Title: title, SubTitle: subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo, Status: "", TimeLeft: ""}, nil
 }
 
 func loadSponsorUsersPage() (*types.SponsorPage, error) {
-	title := "GUEST USERS"
+	title := "Sponsor Portal"
+	subTitle := "GUEST USERS"
 	welcomeTitle := ""
 	welcomeMessage := ""
 	content := ""
 	info := []types.GuestInfo{
-		{Name: "John Doe", Email: "John.doe@gmail.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self"},
-		{Name: "John Doe1", Email: "John.doe@gmail1.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self"},
+		{Name: "John Doe", Email: "John.doe@gmail.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Waiting"},
+		{Name: "John Doe1", Email: "John.doe@gmail1.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Waiting"},
+		{Name: "John Doe1", Email: "John.doe@gmail1.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Admitted", CreatedAt: "9/14/2021 04:00 PM"},
+		{Name: "John Doe1", Email: "John.doe@gmail1.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Admitted", CreatedAt: "9/14/2021 04:00 PM"},
 	}
-	return &types.SponsorPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: info, Status: "Admitted", TimeLeft: "2 hr 3m remaining"}, nil
+	return &types.SponsorPage{Title: title, SubTitle: subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: info, Status: "Admitted", TimeLeft: "2 hr 3m remaining"}, nil
 }
 
 func loadSponsorAddUserPage() (*types.SponsorPage, error) {
-	title := "Add a user"
+	title := "Sponsor Portal"
+	subTitle := "Add a user"
 	welcomeTitle := ""
 	welcomeMessage := ""
 	content := ""
@@ -41,7 +46,7 @@ func loadSponsorAddUserPage() (*types.SponsorPage, error) {
 		{Name: "John Doe", Email: "John.doe@gmail.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self"},
 		{Name: "John Doe1", Email: "John.doe@gmail1.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self"},
 	}
-	return &types.SponsorPage{Title: title, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: info, Status: "Admitted", TimeLeft: "2 hr 3m remaining"}, nil
+	return &types.SponsorPage{Title: title, SubTitle: subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: info, Status: "Admitted", TimeLeft: "2 hr 3m remaining"}, nil
 }
 
 func SponsorLoginPageHandler(w http.ResponseWriter, r *http.Request) {

@@ -15,17 +15,17 @@
 
 <body>
     <form class="row g-3 needs-validation" method="POST">
-        <div class="header">
+        <!-- <div class="header">
             <div class="logo">Logo</div>
             <button type="submit" value="logout" name="action" class="logout btn btn-default" id="logout">Log
                 out</button>
             <div class="header-title">
-                Sponsor Portal
+                {{.Title}}
             </div>
-        </div>
+        </div> -->
         <div class="container">
             <div class="content-title">
-                {{.Title}}
+                {{.SubTitle}}
             </div>
             <div class="content-wrapper">
                 <div class="welcome-wrapper">
@@ -33,68 +33,101 @@
                         {{.WelcomeMessage}}
                     </div>
                 </div>
-                <div class="info input-group mb-3">
-                    <div class="info-left">
-                        <div id="usersCarousel" class="carousel carousel-fade" data-ride="carousel">
-                            <div class="carousel-inner">
-                                {{range $key, $info := .Information}}
-                                    {{if $key}}
-                                    <div class="carousel-item active">
-                                    {{else}}
-                                    <div class="carousel-item">
-                                    {{end}}
-                                        <div class="text">{{$info.Name}}</div>
-                                        <a class="text">{{$info.Email}}</a>
-                                        <div class="text">{{$info.Company}}</div>
-                                        <div class="text">{{$info.Option1}}</div>
-                                        <div class="text">{{$info.Option2}}</div>
-                                    </div>
-                                {{end}}
-                            </div>
-                            <div class="slider-actions">
-                            <a class="carousel-control-prev" href="#usersCarousel" role="button">
-                                Previous
-                              </a>
-                              <a class="carousel-control-next" href="#usersCarousel" role="button">
-                                Next
-                              </a>
-                            </div>
+                <div class="input-group align-item-center justify-between mb-3">
+                    <div>
+                        <img src="/static/img/add.svg" alt="delete" class="icon-add icon">
+                        <button class="btn btn-add" type="submit" name="action" value="add-user">Add a user</button>
+                    </div>
+                    <div>
+                        <div class="dropdown">
+                            <a class="" id="actions" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="/static/img/dots.svg" alt="delete" class="icon-dot icon">
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="actions">
+                                <li><a class="dropdown-item" href="#">Admit Selected</a></li>
+                                <li><a class="dropdown-item" href="#">Admit All</a></li>
+                                <li><a class="dropdown-item" href="#">Extend Time</a></li>
+                                <li><a class="dropdown-item" href="#">Remove Selected</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="info-right">
-                        <div class="status">{{.Status}}</div>
-                        <div class="time-left">{{.TimeLeft}}</div>
-                    </div>
                 </div>
-                <div class="input-group mb-3">
-                    <div class="col-label">
-                        <label for="expiry" class="col-form-label">Expiry: </label>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-users-all-tab" data-bs-toggle="tab"
+                            data-bs-target="#users-all" type="button" role="tab" aria-controls="users-all"
+                            aria-selected="true">All</button>
+                        <button class="nav-link" id="nav-users-waiting" data-bs-toggle="tab"
+                            data-bs-target="#users-waiting" type="button" role="tab" aria-controls="users-waiting"
+                            aria-selected="false">Waiting</button>
+                        <button class="nav-link" id="nav-users-admitted" data-bs-toggle="tab"
+                            data-bs-target="#users-admitted" type="button" role="tab" aria-controls="users-admitted"
+                            aria-selected="false">Admitted</button>
                     </div>
-                    <div class="col-content">
-                        <input type="text" id="expiry" class="form-control">
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="users-all" role="tabpanel"
+                        aria-labelledby="nav-users-all-tab">
+                        {{range $key, $info := .Information}}
+                        <div class="user-item align-item-center justify-between">
+                            <div class="align-item-center">
+                                <input class="form-check-input" type="checkbox" value="">
+                                <div>
+                                    <div class="text">{{$info.Name}}</div>
+                                    <div class="text">{{$info.Email}}</div>
+                                    {{if eq $info.Status "Waiting"}}
+                                    <div class="text">{{$info.Status}}...</div>
+                                    {{else}}
+                                    <div class="text">{{$info.CreatedAt}}</div>
+                                    {{end}}
+                                </div>
+                            </div>
+                            <div>
+                                <img src="/static/img/chevron-down.svg" alt="delete" class="">
+                            </div>
+                        </div>
+                        {{end}}
                     </div>
-                </div>
-                <div class="input-group mb-3">
-                    <div class="col-label">
-                        <label for="action" class="col-form-label">Action: </label>
+                    <div class="tab-pane fade" id="users-waiting" role="tabpanel" aria-labelledby="nav-users-waiting">
+                        {{range $key, $info := .Information}}
+                        {{if eq $info.Status "Waiting"}}
+                        <div class="user-item align-item-center justify-between">
+                            <div class="align-item-center">
+                                <input class="form-check-input" type="checkbox" value="">
+                                <div>
+                                    <div class="text">{{$info.Name}}</div>
+                                    <div class="text">{{$info.Email}}</div>
+                                    <div class="text">{{$info.Status}}...</div>
+                                </div>
+                            </div>
+                        </div>
+                        {{end}}
+                        {{end}}
                     </div>
-                    <div class="col-content">
-                        <select class="form-select" aria-label="action">
-                            <option selected></option>
-                            <option value="Business Meeting">Admit</option>
-                            <option value="Personal Meeting">Revoke</option>
-                        </select>
+                    <div class="tab-pane fade" id="users-admitted" role="tabpanel" aria-labelledby="nav-users-admitted">
+                        {{range $key, $info := .Information}}
+                        {{if eq $info.Status "Admitted"}}
+                        <div class="user-item align-item-center justify-between">
+                            <div class="align-item-center">
+                                <input class="form-check-input" type="checkbox" value="">
+                                <div>
+                                    <div class="text">{{$info.Name}}</div>
+                                    <div class="text">{{$info.Email}}</div>
+                                    <div class="text">{{$info.CreatedAt}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        {{end}}
+                        {{end}}
                     </div>
-                </div>
-                <div class="input-group mb-3">
-                    <button class="btn btn-default" type="submit" name="action" value="add-user">Add a user</button>
                 </div>
             </div>
         </div>
+
         <div class="footer">
             <div class="btn-group">
-                <button class="btn-accept btn">Save</button>
                 <button class="btn-decline btn" id="sponsor-cancel">Cancel</button>
+                <button class="btn-accept btn">Save</button>
             </div>
         </div>
     </form>

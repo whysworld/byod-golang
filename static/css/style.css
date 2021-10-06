@@ -1,3 +1,5 @@
+@import "../font/fonts.css";
+
 body{
     background-color: #e5eff9;
     margin: 0;
@@ -7,11 +9,23 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    font-family: SourceSansPro;
 }
 .header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+.header-title{
+    font-family: SourceSansPro;
+    font-size: 19px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #474747;
 }
 .container{
     display: flex;
@@ -25,9 +39,10 @@ body{
 }
 .content-wrapper{
     padding: 15px 20px;
+    overflow: auto;
 }
 .content-title{
-    font-family: SourceSansPro;
+    font-family: SourceSansProsemibold;
     font-size: 16.6px;
     font-weight: bold;
     font-stretch: normal;
@@ -46,13 +61,40 @@ body{
     overflow: auto;
 }
 .welcome-title{
-    font-weight: bold;
+    font-family: SourceSansProsemibold;
+    font-size: 16.6px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #474747;
+}
+.content{
+    font-family: SourceSansPro;
+    font-size: 16.6px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #474747;
 }
 .welcome-wrapper{
     padding-bottom: 15px;
 }
+.welcome-message{
+    font-family: SourceSansPro;
+    font-size: 16.6px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #474747;
+}
 .logo{
-    font-family: Roboto;
+    font-family: SourceSansPro;
     font-size: 18px;
     font-weight: normal;
     font-stretch: normal;
@@ -68,7 +110,16 @@ body{
     justify-content: space-around;
 }
 .btn{
-    border-radius: 5px;
+    font-family: SourceSansPro;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px !important;
     background-color: #2670eb;
     padding: 10px 25px;
     color: white;
@@ -76,14 +127,54 @@ body{
 
 }
 .btn.btn-decline{
-    color: black;;
-    background-color: white;
+    font-family: SourceSansPro;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #474747;
+    background-color: transparent;
+    border: solid 1px #707070;
+    margin-right: 10px;
 }
 .btn.btn-custom{
     background-color: white;
     border-color: #ced4da;
     border-left-width: 0;
     padding: 10px;
+}
+.input-custom{
+    font-family: SourceSansPro;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #474747;
+}
+.form-floating>label{
+    font-family: SourceSansProsemibold;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #474747;
+    opacity: 1 !important;
+}
+.form-floating>.form-select{
+    font-family: SourceSansPro;
+    font-size: 13px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #474747;
 }
 .form-control:focus,
 .btn-custom:focus,
@@ -136,4 +227,96 @@ body{
 .carousel-control-prev:hover{
     color: black;
     opacity: 1;
+}
+.icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    fill: #666666;
+}
+.icon-dot{
+    width: 20px;
+    height: 20px;
+    margin-top: 4px;
+    margin-right: -10px;
+}
+.btn-add{
+    background: transparent;
+    font-family: SourceSansPro;
+    font-size: 13px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #474747;
+    padding: 0;
+}
+.align-item-center{
+    display: flex;
+    align-items: center;
+}
+.justify-between{
+    justify-content: space-between;
+}
+.nav{
+    justify-content: center;
+}
+.tab-content .text{
+    font-family: SourceSansPro;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #474747;
+}
+.nav-tabs .nav-link{
+    font-family: SourceSansPro;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #474747;
+    padding: 5px 25px;
+}
+.nav-tabs .nav-link.active{
+    border-color: transparent;
+    border-bottom: solid 2px #00a09e;;
+    color: #00a09e;
+}
+.nav-tabs .nav-link:focus:not(.active), .nav-tabs .nav-link:hover:not(.active){
+    border-color: transparent;
+}
+.form-check-input{
+    width: 16px;
+    height: 16px;
+}
+.form-check-input:checked{
+    background: #17bebb;
+    color: #17bebb;
+    border-color: #17bebb;
+}
+.user-item{
+    padding: 10px 2px 10px 11px;
+    border-radius: 5.5px;
+    border: solid 1.1px #d6d6d6;
+    background-color: #fff;
+    margin-top: 5px;
+}
+.user-item .form-check-input{
+    margin-right: 12px;
+}
+.dropdown-item{
+    font-family: SourceSansPro;
+    font-size: 13px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #474747;
 }

@@ -8,7 +8,8 @@ type NullString struct {
 type HotSpotPage struct {
 	PortalID	   string
 	Query		   string
-	Title          string
+	Title		   string
+	SubTitle       string
 	WelcomeTitle   string
 	WelcomeMessage string
 	Content        string
@@ -23,12 +24,15 @@ type GuestInfo struct {
 	SponsorEmail string
 	Option1      string
 	Option2      string
+	Status		   string
+	CreatedAt      string
 }
 
 type RegistrationPage struct {
 	PortalID	   string
 	Query		   string
 	Title          string
+	SubTitle       string
 	WelcomeTitle   string
 	WelcomeMessage string
 	Content        string
@@ -39,6 +43,7 @@ type SponsorPage struct {
 	PortalID	   string
 	Query		   string
 	Title          string
+	SubTitle       string
 	WelcomeTitle   string
 	WelcomeMessage string
 	Content        string
@@ -57,4 +62,6 @@ type User struct {
 	Option2        string
 	Role           string
 	CreatedBy      string
+	Status		   string
+	CreatedAt      string
 }

@@ -18,12 +18,12 @@
         <div class="header">
             <div class="logo">Logo</div>
             <div class="header-title">
-                Self Registration
+                {{.Title}}
             </div>
         </div>
         <div class="container">
             <div class="content-title">
-                {{.Title}}
+                {{.SubTitle}}
             </div>
             <div class="content-wrapper">
                 <div class="welcome-wrapper">
@@ -31,7 +31,7 @@
                         {{.WelcomeTitle}}
                     </div>
                     <div class="welcome-message">
-                        {{.WelcomeMessage}}
+                        <!-- {{.WelcomeMessage}} -->
                     </div>
                 </div>
                 <div class="content">
@@ -41,8 +41,8 @@
         </div>
         <div class="footer">
             <div class="btn-group">
-                <button type="submit" name="action" value="accept" class="btn-accept btn">Accept</button>
                 <button type="submit" name="action" value="decline" class="btn-decline btn">Decline</button>
+                <button type="submit" name="action" value="accept" class="btn-accept btn">Accept</button>
             </div>
         </div>
     </form>
