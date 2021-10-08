@@ -8,7 +8,6 @@ import (
 	"whysworld.net/byod/types"
 	"whysworld.net/byod/sessions"
 	"whysworld.net/byod/db"
-	// "github.com/satori/go.uuid"
 	"github.com/gorilla/mux"
 )
 
@@ -54,7 +53,7 @@ func SponsorLoginPageHandler(w http.ResponseWriter, r *http.Request) {
     portal_id := vars["portal_id"]
 	log.Print("login: ", portal_id)
 	if sessions.IsLoggedIn(r) {
-		redirectURI := fmt.Sprintf("%s-users", portal_id)
+		redirectURI := fmt.Sprintf("/guestportal/%s/users", portal_id)
 		http.Redirect(w, r, redirectURI, http.StatusFound)
 		return
 	}
@@ -113,12 +112,25 @@ func SponsorUsersPageHandler(w http.ResponseWriter, r *http.Request) {
 		case "POST":
 			r.ParseForm()
 			action := r.Form.Get("action")
+			log.Print("action: ", action)
 			if action == "logout" {
 				redirectURI := fmt.Sprintf("/guestportal/%s/logout?loggedout=true", portal_id)
 				http.Redirect(w, r, redirectURI, http.StatusFound)
 				return
 			} else if action == "add-user"{
 				redirectURI := fmt.Sprintf("/guestportal/%s/adduser?action=add-user", portal_id)
+				http.Redirect(w, r, redirectURI, http.StatusFound)
+			} else if action == "admit_selected"{
+				redirectURI := fmt.Sprintf("/guestportal/%s/users?action=admit_selected", portal_id)
+				http.Redirect(w, r, redirectURI, http.StatusFound)
+			} else if action == "admit_all"{
+				redirectURI := fmt.Sprintf("/guestportal/%s/users?action=admit_all", portal_id)
+				http.Redirect(w, r, redirectURI, http.StatusFound)
+			} else if action == "extend_time"{
+				redirectURI := fmt.Sprintf("/guestportal/%s/users?action=extend_time", portal_id)
+				http.Redirect(w, r, redirectURI, http.StatusFound)
+			} else if action == "remove_selected"{
+				redirectURI := fmt.Sprintf("/guestportal/%s/users?action=remove_selected", portal_id)
 				http.Redirect(w, r, redirectURI, http.StatusFound)
 			}
 		default: 
