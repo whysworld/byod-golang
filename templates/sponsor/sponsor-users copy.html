@@ -59,33 +59,15 @@
                 </div>
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        {{if eq .Status "all"}}
-                        <button type="submit" class="nav-link active" id="nav-users-all-tab" data-bs-toggle="tab"
-                            data-bs-target="#users-all" type="button" name="status" value="all" role="tab"
-                            aria-controls="users-all" aria-selected="true">All</button>
-                        {{else}}
-                        <button type="submit" class="nav-link" id="nav-users-all-tab" data-bs-toggle="tab"
-                            data-bs-target="#users-all" type="button" name="status" value="all" role="tab"
-                            aria-controls="users-all" aria-selected="true">All</button>
-                        {{end}}
-                        {{if eq .Status "waiting"}}
-                        <button type="submit" name="status" value="waiting" class="nav-link active"
-                            id="nav-users-waiting" data-bs-toggle="tab" data-bs-target="#users-waiting" type="button"
-                            role="tab" aria-controls="users-waiting" aria-selected="false">Waiting</button>
-                        {{else}}
-                        <button type="submit" name="status" value="waiting" class="nav-link" id="nav-users-waiting"
-                            data-bs-toggle="tab" data-bs-target="#users-waiting" type="button" role="tab"
-                            aria-controls="users-waiting" aria-selected="false">Waiting</button>
-                        {{end}}
-                        {{if eq .Status "admitted"}}
-                        <button type="submit" name="status" value="admitted" class="nav-link active"
-                            id="nav-users-admitted" data-bs-toggle="tab" data-bs-target="#users-admitted" type="button"
-                            role="tab" aria-controls="users-admitted" aria-selected="false">Admitted</button>
-                        {{else}}
-                        <button type="submit" name="status" value="admitted" class="nav-link" id="nav-users-admitted"
-                            data-bs-toggle="tab" data-bs-target="#users-admitted" type="button" role="tab"
-                            aria-controls="users-admitted" aria-selected="false">Admitted</button>
-                        {{end}}
+                        <button class="nav-link active" id="nav-users-all-tab" data-bs-toggle="tab"
+                            data-bs-target="#users-all" type="button" role="tab" aria-controls="users-all"
+                            aria-selected="true">All</button>
+                        <button class="nav-link" id="nav-users-waiting" data-bs-toggle="tab"
+                            data-bs-target="#users-waiting" type="button" role="tab" aria-controls="users-waiting"
+                            aria-selected="false">Waiting</button>
+                        <button class="nav-link" id="nav-users-admitted" data-bs-toggle="tab"
+                            data-bs-target="#users-admitted" type="button" role="tab" aria-controls="users-admitted"
+                            aria-selected="false">Admitted</button>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">

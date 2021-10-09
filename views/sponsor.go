@@ -11,6 +11,14 @@ import (
 	"github.com/gorilla/mux"
 )
 
+func replaceQueryParams(r *http.Request, key string, value string) (string){
+	q := r.URL.Query()
+	q.Set(key, value)
+	r.URL.RawQuery = q.Encode()
+	redirectURI := fmt.Sprintf("%s", r.URL)
+	return redirectURI
+}
+
 func loadSponsorLoginPage() (*types.SponsorPage, error) {
 	title := "Sponsor Portal"
 	subTitle := "LOGIN"
@@ -20,19 +28,34 @@ func loadSponsorLoginPage() (*types.SponsorPage, error) {
 	return &types.SponsorPage{Title: title, SubTitle: subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: DefaultInfo, Status: "", TimeLeft: ""}, nil
 }
 
-func loadSponsorUsersPage() (*types.SponsorPage, error) {
+func loadSponsorUsersPage(status string) (*types.SponsorPage, error) {
 	title := "Sponsor Portal"
 	subTitle := "GUEST USERS"
 	welcomeTitle := ""
 	welcomeMessage := ""
 	content := ""
-	info := []types.GuestInfo{
-		{Name: "John Doe", Email: "John.doe@gmail.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Waiting"},
-		{Name: "John Doe1", Email: "John.doe@gmail1.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Waiting"},
-		{Name: "John Doe1", Email: "John.doe@gmail1.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Admitted", CreatedAt: "9/14/2021 04:00 PM"},
-		{Name: "John Doe1", Email: "John.doe@gmail1.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Admitted", CreatedAt: "9/14/2021 04:00 PM"},
+	if status == "waiting"{
+		info := []types.GuestInfo{
+			{Name: "John Doe", Email: "John.doe@gmail1.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Waiting"},
+			{Name: "John Doe1", Email: "John.doe@gmail2.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Waiting"},
+		}
+		return &types.SponsorPage{Title: title, SubTitle: subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: info, TimeLeft: "2 hr 3m remaining", Status: "waiting"}, nil
+	} else if status == "admitted"{
+		info := []types.GuestInfo{
+			{Name: "John Doe2", Email: "John.doe@gmail3.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Admitted", CreatedAt: "9/14/2021 04:00 PM"},
+			{Name: "John Doe3", Email: "John.doe@gmail4.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Admitted", CreatedAt: "9/14/2021 04:00 PM"},
+		}
+		return &types.SponsorPage{Title: title, SubTitle: subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: info, TimeLeft: "2 hr 3m remaining", Status: "admitted"}, nil
+	} else {
+		info := []types.GuestInfo{
+			{Name: "John Doe", Email: "John.doe@gmail1.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Waiting"},
+			{Name: "John Doe1", Email: "John.doe@gmail2.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Waiting"},
+			{Name: "John Doe2", Email: "John.doe@gmail3.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Admitted", CreatedAt: "9/14/2021 04:00 PM"},
+			{Name: "John Doe3", Email: "John.doe@gmail4.com", Company: "ABC Corp", SponsorEmail: "", Option1: "Here for Interview", Option2: "Representing self", Status: "Admitted", CreatedAt: "9/14/2021 04:00 PM"},
+		}
+		return &types.SponsorPage{Title: title, SubTitle: subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: info, TimeLeft: "2 hr 3m remaining", Status: "all"}, nil
 	}
-	return &types.SponsorPage{Title: title, SubTitle: subTitle, WelcomeTitle: welcomeTitle, WelcomeMessage: welcomeMessage, Content: content, Information: info, Status: "Admitted", TimeLeft: "2 hr 3m remaining"}, nil
+
 }
 
 func loadSponsorAddUserPage() (*types.SponsorPage, error) {
@@ -100,8 +123,7 @@ func SponsorLoginPageHandler(w http.ResponseWriter, r *http.Request) {
 func SponsorUsersPageHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
     portal_id := vars["portal_id"]
-	p, err := loadSponsorUsersPage()
-	print(p)
+	p, err := loadSponsorUsersPage("all")
 	if err != nil {
 		return	
 	}
@@ -112,7 +134,27 @@ func SponsorUsersPageHandler(w http.ResponseWriter, r *http.Request) {
 		case "POST":
 			r.ParseForm()
 			action := r.Form.Get("action")
-			log.Print("action: ", action)
+			status := r.Form.Get("status")
+			selectedItems := r.PostForm["selected"]
+			//get selected emails
+			log.Print("action: ", selectedItems)
+			log.Print("status: ", status)
+			if status == "waiting" {
+				p, _ := loadSponsorUsersPage("waiting")
+				templateName := fmt.Sprintf("%s-users", portal_id)
+				renderSponsorTemplate(w, templateName, p)
+				return
+			} else if status == "admitted"{
+				p, _ := loadSponsorUsersPage("admitted")
+				templateName := fmt.Sprintf("%s-users", portal_id)
+				renderSponsorTemplate(w, templateName, p)
+				return
+			} else {
+				p, _ := loadSponsorUsersPage("all")
+				templateName := fmt.Sprintf("%s-users", portal_id)
+				renderSponsorTemplate(w, templateName, p)
+				return
+			}
 			if action == "logout" {
 				redirectURI := fmt.Sprintf("/guestportal/%s/logout?loggedout=true", portal_id)
 				http.Redirect(w, r, redirectURI, http.StatusFound)
@@ -120,21 +162,27 @@ func SponsorUsersPageHandler(w http.ResponseWriter, r *http.Request) {
 			} else if action == "add-user"{
 				redirectURI := fmt.Sprintf("/guestportal/%s/adduser?action=add-user", portal_id)
 				http.Redirect(w, r, redirectURI, http.StatusFound)
+				return
 			} else if action == "admit_selected"{
-				redirectURI := fmt.Sprintf("/guestportal/%s/users?action=admit_selected", portal_id)
+				redirectURI := replaceQueryParams(r, "action", "admit_selected")
 				http.Redirect(w, r, redirectURI, http.StatusFound)
+				return
 			} else if action == "admit_all"{
-				redirectURI := fmt.Sprintf("/guestportal/%s/users?action=admit_all", portal_id)
+				redirectURI := replaceQueryParams(r, "action", "admit_all")
 				http.Redirect(w, r, redirectURI, http.StatusFound)
+				return
 			} else if action == "extend_time"{
-				redirectURI := fmt.Sprintf("/guestportal/%s/users?action=extend_time", portal_id)
+				redirectURI := replaceQueryParams(r, "action", "extend_time")
 				http.Redirect(w, r, redirectURI, http.StatusFound)
+				return
 			} else if action == "remove_selected"{
-				redirectURI := fmt.Sprintf("/guestportal/%s/users?action=remove_selected", portal_id)
+				redirectURI := replaceQueryParams(r, "action", "remove_selected")
 				http.Redirect(w, r, redirectURI, http.StatusFound)
+				return
 			}
 		default: 
 			renderSponsorTemplate(w, "sponsor-users", p)
+			return
 	}
 }
 
